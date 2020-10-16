@@ -1,0 +1,35 @@
+---
+# URL to hashicorp download page
+hashicorp_url: https://releases.hashicorp.com
+
+# Hashicorp tools and their versions you want
+# Supported state values are: present, reinstall, absent 
+hashicorp_tools:
+  []
+    # - name: boundary
+    #   version: 0.1.0
+    #   state: present
+    # - name: consul
+    #   version: 1.8.0
+    #   state: present
+    # - name: nomad
+    #   version: 0.10.3
+    #   state: present
+    # - name: packer
+    #   version: 1.6.3
+    #   state: present
+    # - name: terraform
+    #   version: 0.13.0
+    #   state: present
+    # - name: vagrant
+    #   version: 2.2.7
+    #   state: present
+    # - name: vault
+    #   version: 1.3.4
+    #   state: present
+    # - name: waypoint
+    #   version: 0.1.1
+    #   state: present
+
+# Installation directory
+install_dir: /usr/local/bin/

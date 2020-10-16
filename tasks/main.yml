@@ -1,0 +1,4 @@
+---
+- include_tasks: tools.yml
+  tags:
+    - install
