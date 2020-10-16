@@ -9,7 +9,7 @@ Here is how you can help, a lot of steps are related to GitHub, not specifically
 
 ## 1. Create an issue
 
-When you see some issue or have an idea for improvement, [create an issue](https://github.com/monolithprojects/ansible-github_actions_runner/issues).
+When you see some issue or have an idea for improvement, [create an issue](https://github.com/monolithprojects/ansible-hashicorp_tools/issues).
 
 ## 2. Fork the project
 
@@ -27,7 +27,7 @@ Install [molecule](https://molecule.readthedocs.io/en/stable/) and run the test:
 
 ```bash
 pip install molecule ansible-lint docker
-cd ansible-github_actions_runner
+cd ansible-hashicorp_tools
 molecule test
 ```
 
