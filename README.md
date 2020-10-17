@@ -8,6 +8,15 @@
 
 This Ansible Role will install/upgrade/uninstall Hashicorp tools.
 
+- [Baundary](https://www.boundaryproject.io/)
+- [consul](https://www.consul.io/)
+- [Nomad](https://www.nomadproject.io/)
+- [Packer](https://www.packer.io/)
+- [Terraform](https://www.terraform.io/)
+- [Vagrant](https://www.vagrantup.com/)
+- [Vault](https://www.vaultproject.io/)
+- [Waypoint](https://www.waypointproject.io/)
+
 ## Role Variables
 
 This is a copy from `defaults/main.yml`
