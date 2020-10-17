@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/MonolithProjects/ansible-hashicorp_tools)](https://github.com/MonolithProjects/ansible-hashicorp_tools/blob/master/LICENSE)
 
 This Ansible Role will install/upgrade/uninstall Hashicorp tools.
-This role does not use deb or rpm packages but installs the binaries directly from https://releases.hashicorp.com to the system.
+This role does not use deb or rpm packages but installs the binaries directly from https://releases.hashicorp.com to the system. 
 
 - [Baundary](https://www.boundaryproject.io/)
 - [consul](https://www.consul.io/)
@@ -17,6 +17,10 @@ This role does not use deb or rpm packages but installs the binaries directly fr
 - [Vagrant](https://www.vagrantup.com/)
 - [Vault](https://www.vaultproject.io/)
 - [Waypoint](https://www.waypointproject.io/)
+
+## Requirements
+
+- Since the binaries are distributed inside of a Zip file, the role will install `unzip` if it's not already on the system. 
 
 ## Role Variables
 
