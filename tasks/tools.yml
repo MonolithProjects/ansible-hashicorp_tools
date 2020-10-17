@@ -1,55 +1,55 @@
 ---
-- name: Install prerequisites
-  package:
-    pkg: unzip
-    state: present
-    update_cache: yes
-
 - name: Checking already installed Hashicorp tools
   stat:
-    path: "{{ install_dir }}/{{ item['name'] }}"
+    path: "{{ install_dir }}/{{ item.name }}"
   register: hashicorp_tools_installed
-  loop: "{{ hashicorp_tools }}"
+  with_items: "{{ hashicorp_tools }}"
 
-# BROKEN 
-# - name: Capturing versions of installed previously tools
-#   shell: | 
-#     "{{ install_dir }}/{{ item['item']['name'] }} version | grep -Po '(\d+\.)?(\d+\.)?(\*|\d+)'"
-#   register: hashicorp_tools_installed_versions
-#   changed_when: false
-#   loop: "{{ hashicorp_tools_installed['results'] }}"
-#   when: item['stat']['exists']
+- name: Capturing version of previously installed Consul, Nomad, Packer, Terraform, Vault, Waypoint
+  shell: |
+    set -o pipefail
+    "{{ install_dir }}/{{ item.item.name }}" version | \
+    grep -E 'Version Number: |Consul v|Nomad v|Packer v|Terraform v|Installed Version|Vault v|Waypoint v' | \
+    grep -Eo "([0-9]{1,}\.)+[0-9]{1,}"
+  args:
+    executable: /bin/bash
+  register: hashicorp_tools_installed_versions
+  with_items: "{{ hashicorp_tools_installed.results }}"
+  when:
+    - item.stat.exists
 
-# - name: Upgrading Existing Tools
-#   unarchive:
-#     src: "{{ hashicorp_url }}/{{ item['item']['item']['name'] }}/{{ item['item']['item']['version'] }}/{{ item['item']['item']['name'] }}_{{ item['item']['item']['version'] }}_{{ ansible_system|lower }}_amd64.zip" # noqa 204
-#     dest: "{{ install_dir }}"
-#     mode: 0755
-#     remote_src: true
-#   loop: "{{ hashicorp_tools_installed_versions['results'] }}"
-#   when:
-#     - item['item']['item']['state']|lower == "present"
-#     - item['item']['stat']['exists']
-#     - item['stdout'] is defined
-#     - item['item']['item']['version'] != item['stdout']
-
-- name: Installing tools
+- name: Upgrading Existing Tools
   unarchive:
-    src: "{{ hashicorp_url }}/{{ item['item']['item']['name'] }}/{{ item['item']['item']['version'] }}/{{ item['item']['item']['name'] }}_{{ item['item']['item']['version'] }}_{{ ansible_system|lower }}_amd64.zip" # noqa 204
+    src: "{{ hashicorp_url }}/{{ item.item.item.name }}/{{ item.item.item.version }}/\
+    {{ item.item.item.name }}_{{ item.item.item.version }}_{{ ansible_system|lower }}_amd64.zip"
     dest: "{{ install_dir }}"
     mode: 0755
     remote_src: true
-  loop: "{{ hashicorp_tools }}"
+  with_items: "{{ hashicorp_tools_installed_versions.results }}"
   when:
-    - item['item']['item']['state']|lower == "present" or item['item']['item']['state']|lower == "reinstall"
-    # - not item['item']['stat']['exists']
+    - item.item.item.state|lower == "present"
+    - item.item.stat.exists
+    - item.stdout is defined
+    - item.item.item.version != item.stdout
+
+- name: Installing tools
+  unarchive:
+    src: "{{ hashicorp_url }}/{{ item.item.item.name }}/{{ item.item.item.version }}/\
+    {{ item.item.item.name }}_{{ item.item.item.version }}_{{ ansible_system|lower }}_amd64.zip"
+    dest: "{{ install_dir }}"
+    mode: 0755
+    remote_src: true
+  with_items: "{{ hashicorp_tools_installed_versions.results }}"
+  when:
+    - item.item.item.state|lower == "present"
+    - not item.item.stat.exists
 
 - name: Uninstall tools
   file:
-    path: "{{ install_dir }}/{{ item['item']['item']['name'] }}"
+    path: "{{ install_dir }}/{{ item.item.item.name }}"
     state: absent
-  loop: "{{ hashicorp_tools }}"
+  with_items: "{{ hashicorp_tools_installed_versions.results }}"
   when:
-  #   - item['item']['stat']['exists']
-  #   - item['stdout'] is defined
-    - item['item']['item']['state']|lower == "absent"
+    - item.item.stat.exists
+    - item.stdout is defined
+    - item.item.item.state|lower == "absent"

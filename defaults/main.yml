@@ -10,23 +10,23 @@ hashicorp_tools:
     #   version: 0.1.0
     #   state: present
     # - name: consul
-    #   version: 1.8.0
+    #   version: 1.8.4
     #   state: present
     # - name: nomad
-    #   version: 0.10.3
+    #   version: 0.12.5
     #   state: present
     # - name: packer
-    #   version: 1.6.3
+    #   version: 1.6.4
     #   state: present
     # - name: terraform
-    #   version: 0.13.0
-    #   state: present
+    #   version: 0.13.4
+    #   state: absent
     # - name: vagrant
-    #   version: 2.2.7
+    #   version: 2.2.10
     #   state: present
     # - name: vault
-    #   version: 1.3.4
-    #   state: present
+    #   version: 1.5.4
+    #   state: absent
     # - name: waypoint
     #   version: 0.1.1
     #   state: present

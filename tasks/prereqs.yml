@@ -1,0 +1,26 @@
+---
+- name: Install UnZip
+  package:
+    pkg: unzip
+    state: present
+    update_cache: yes
+
+- name: Install deb libfuse2 package (Vagrant only)
+  package:
+    pkg: libfuse2
+    state: present
+    update_cache: yes
+  with_items: "{{ hashicorp_tools }}"
+  when:
+    - item.name == 'vagrant'
+    - ansible_pkg_mgr == "apt"
+
+- name: Install rpm fuse package (Vagrant only)
+  package:
+    pkg: fuse
+    state: present
+    update_cache: yes
+  with_items: "{{ hashicorp_tools }}"
+  when:
+    - item.name == 'vagrant'
+    - ansible_pkg_mgr == "yum" or ansible_pkg_mgr == "dnf"
