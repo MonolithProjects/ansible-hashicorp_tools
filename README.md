@@ -24,7 +24,11 @@ This role does not use deb or rpm packages but installs the binaries directly fr
 
 - In case you install `vagrant`, the role will automatically install `fuse` or `libfuse2` (depending on the packiging tool you system is using)
 
-
+* Weekly tested on (but will run on older releases just fine):
+  * CentOS 8
+  * Debian 10
+  * Fedora 32
+  * Ubuntu 20
 
 ## Role Variables
 
