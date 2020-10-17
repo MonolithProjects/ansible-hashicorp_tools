@@ -20,7 +20,11 @@ This role does not use deb or rpm packages but installs the binaries directly fr
 
 ## Requirements
 
-- Since the binaries are distributed inside of a Zip file, the role will install `unzip` if it's not already on the system. 
+- Since the binaries are distributed inside of a Zip file, the role will automatically install `unzip` if it's not already on the system.
+
+- In case you install `vagrant`, the role will automatically install `fuse` or `libfuse2` (depending on the packiging tool you system is using)
+
+
 
 ## Role Variables
 
