@@ -14,6 +14,7 @@
   args:
     executable: /bin/bash
   register: hashicorp_tools_installed_versions
+  changed_when: item.item.version not in hashicorp_tools_installed_versions.stdout
   with_items: "{{ hashicorp_tools_installed.results }}"
   when:
     - item.stat.exists

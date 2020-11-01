@@ -17,7 +17,7 @@
 
 - name: Install rpm fuse package (Vagrant only)
   package:
-    pkg: fuse
+    pkg: fuse-libs
     state: present
     update_cache: yes
   with_items: "{{ hashicorp_tools }}"

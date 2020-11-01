@@ -27,7 +27,7 @@ Ansible Role does not use deb or rpm packages but installs the binaries directly
 * Weekly tested on (but will run on older releases just fine):
   * CentOS 8
   * Debian 10
-  * Fedora 32
+  * Fedora 33
   * Ubuntu 20
 
 ## Role Variables
