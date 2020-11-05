@@ -1,8 +1,8 @@
 # Hashicorp Tools - Ansible Role
 
-[![Galaxy Quality](https://img.shields.io/ansible/quality/51325?style=flat&logo=ansible)](https://galaxy.ansible.com/monolithprojects/hashicorp_tools)
+[![Galaxy Quality](https://img.shields.io/ansible/quality/51653?style=flat&logo=ansible)](https://galaxy.ansible.com/monolithprojects/hashicorp_tools)
 [![Role version](https://img.shields.io/github/v/release/MonolithProjects/ansible-hashicorp_tools)](https://galaxy.ansible.com/monolithprojects/hashicorp_tools)
-[![Role downloads](https://img.shields.io/ansible/role/d/51325)](https://galaxy.ansible.com/monolithprojects/hashicorp_tools)
+[![Role downloads](https://img.shields.io/ansible/role/d/51653)](https://galaxy.ansible.com/monolithprojects/hashicorp_tools)
 [![GitHub Actions](https://github.com/MonolithProjects/ansible-hashicorp_tools/workflows/molecule%20test/badge.svg?branch=master)](https://github.com/MonolithProjects/ansible-hashicorp_tools/actions)
 [![License](https://img.shields.io/github/license/MonolithProjects/ansible-hashicorp_tools)](https://github.com/MonolithProjects/ansible-hashicorp_tools/blob/master/LICENSE)
 
