@@ -1,0 +1,40 @@
+---
+
+- name: Find the latest version (authenticate to GitHub)
+  uri:
+    url: "https://api.github.com/repos/hashicorp/{{ item }}/releases/latest"
+    return_content: yes
+    headers:
+      Authorization: "token {{ github_access_token }}"
+      Accept: "application/vnd.github.v3+json"
+    method: GET
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+  register: result_latest
+  loop: "{{ hashicorp_tools|flatten(levels=1) }}"
+  when:
+    - github_access_token | length > 0
+    - hashicorp_tools.{{ item }}.version == "latest"
+
+- name: Find the latest version (no authentication to GitHub)
+  uri:
+    url: "https://api.github.com/repos/hashicorp/{{ item }}/releases/latest"
+    return_content: yes
+    method: GET
+    status_code: 200
+    body_format: json
+  register: result_latest
+  loop: "{{ hashicorp_tools|flatten(levels=1) }}"
+  when:
+    - github_access_token | length == 0
+    - item.version == "latest"
+
+# - set_fact:
+#       {"{{ item.item.name }}_latest":"{{ item.json.tag_name }}"}
+#   with_items: "{{ result_latest.results }}"
+#     - hashicorp_tools.{{ item }}.version == "latest"
+
+- debug:
+    var: result_latest
+  loop: "{{ result_latest.|flatten(levels=1) }}"
