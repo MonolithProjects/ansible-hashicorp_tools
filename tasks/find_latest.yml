@@ -1,7 +1,7 @@
 ---
 - debug:
-    var: item.version
-  loop: "{{ hashicorp_tools }}"
+    var: item
+  loop: "{{ hashicorp_tools|dict }}"
 
 
 # - name: Find the latest version (authenticate to GitHub)
