@@ -19,7 +19,7 @@
           - 30
           - 31
           - 32
-          - 33
+          # - 33 Temporary commented out. Ansible Galaxy does not recognize Fedora33
       - name: Debian
         versions:
           - buster
