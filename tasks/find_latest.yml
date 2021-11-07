@@ -1,0 +1,41 @@
+---
+# - debug:
+#     var: item.value.version
+#   loop: "{{ lookup('dict', hashicorp_tools) }}"
+
+
+- name: Find the latest version (authenticate to GitHub)
+  uri:
+    url: "https://api.github.com/repos/hashicorp/{{ item.key }}/releases/latest"
+    return_content: yes
+    headers:
+      Authorization: "token {{ github_access_token }}"
+      Accept: "application/vnd.github.v3+json"
+    method: GET
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+  register: result_latest
+  loop: "{{ lookup('dict', hashicorp_tools) }}"
+  when:
+    - github_access_token | length > 0
+    - item.value.version == "latest"
+
+- name: Find the latest version (no authentication to GitHub)
+  uri:
+    url: "https://api.github.com/repos/hashicorp/{{ item.key }}/releases/latest"
+    return_content: yes
+    method: GET
+    status_code: 200
+    body_format: json
+  register: result_latest
+  loop: "{{ lookup('dict', hashicorp_tools) }}"
+  when:
+    - github_access_token | length == 0
+    - item.value.version == "latest"
+
+- set_fact:
+      {"{{ item.item.name }}_latest":"{{ item.json.tag_name }}"}
+  no_log: no
+  loop: "{{ lookup('dict', hashicorp_tools) }}"
+  when: item.item.version == "latest"

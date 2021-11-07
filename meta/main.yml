@@ -2,6 +2,7 @@
   galaxy_info:
     author: Michal Muransky
     role_name: hashicorp_tools
+    namespace: monolithprojects
     description: Ansible Role used for Hashicorp tools installation/upgrade/uninstallation.
     company: MonolithProjects
     license: "license (MIT)"
